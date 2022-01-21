@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: 'JsonMergeExample, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'
+  version: '1.0'
+paths:
+  /WeatherForecast:
+    get:
+      tags:
+        - WeatherForecast
+      operationId: GetWeatherForecast
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WeatherForecast'
+    patch:
+      tags:
+        - WeatherForecast
+      operationId: MergePatch
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecastPatch'
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    WeatherForecast:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        temperatureC:
+          type: integer
+          format: int32
+        temperatureF:
+          type: integer
+          format: int32
+          readOnly: true
+        summary:
+          type: string
+          nullable: true
+      additionalProperties: false
+    WeatherForecastPatch:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          nullable: true
+        temperatureC:
+          type: integer
+          format: int32
+          nullable: true
+        summary:
+          type: string
+          nullable: true
+      additionalProperties: false
