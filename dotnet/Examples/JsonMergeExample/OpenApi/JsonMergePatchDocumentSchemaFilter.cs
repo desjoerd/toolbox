@@ -16,9 +16,9 @@ namespace JsonMergeExample.OpenApi
             var underlyingType = context.Type.GetGenericArguments()[0];
 
             var underlyingSchema = context.SchemaGenerator.GenerateSchema(
-                underlyingType, 
-                context.SchemaRepository, 
-                context.MemberInfo, 
+                underlyingType,
+                context.SchemaRepository,
+                context.MemberInfo,
                 context.ParameterInfo
             );
 
@@ -30,7 +30,7 @@ namespace JsonMergeExample.OpenApi
             }
         }
 
-        private bool IsJsonMergePatchDocument(Type type) 
+        private bool IsJsonMergePatchDocument(Type type)
             => type is { IsGenericType: true } && type.GetGenericTypeDefinition() == typeof(JsonMergePatchDocument<>);
     }
 }
